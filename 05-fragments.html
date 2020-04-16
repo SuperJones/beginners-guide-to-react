@@ -1,14 +1,32 @@
+<!--
+  1. Learning about string interpolation:
+    - {} will change variable into what comes after the equal sign
+    - This can be used for className as well.
+      - Look in dev tools > head > 1st script tag to see output
+  2. Learning about props and self closing tags
+  3. {... props} spread of props object
+  4. Adding className after spread overrides className variable
+    - Whatever comes last is winner in name conflict
+-->
+
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    const element = (
-      <>
-        <span>Hello</span> <span>World</span>
-      </>
-    )
-    ReactDOM.render(element, document.getElementById('root'))
+    const rootElement = document.getElementById('root')
+    // const myChildren = "Hello"
+    // const worldChild = " World"
+    const children = "Hello World"
+    const className = "container"
+    const props = {children, className}
+    // const element = <div className={className}>{children}</div>
+    // const element = <div className={className} children={children}></div>
+    // const element = <div className={className} children={children} />
+    const element = <div id="app-root" {... props} className="not-container" />
+    ReactDOM.render(element, rootElement)
   </script>
+  <!-- All of this is compiled into the following line -->
+  <!-- <div id="root"><div id="app-root" class="not-container">Hello World</div></div> -->
 </body>
