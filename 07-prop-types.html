@@ -1,26 +1,60 @@
+<!--
+  Create own custom function component to DRY up duplicate code
+  It takes props object
+  Must use capital letter so that Babel will compile it.
+-->
+
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
-  <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+  <!-- <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script> -->
   <script type="text/babel">
-    const rootElement = document.getElementById('root')
+    // const Message = (props) => <div className="message">{props.msg}</div>
+    // OPTION 1: Not very html like
+    // const element = (
+    // <div className="container">
+    //   {message({msg: 'Hello World'})}
+    //   {message({msg: 'Goodbye World'})}
+    // </div>
+    // )
 
-    function SayHello({firstName, lastName}) {
-      return (
-        <div>
-          Hello {firstName} {lastName}!
-        </div>
-      )
-    }
-    SayHello.propTypes = {
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
-    }
+    // OPTION 2
+    // const element = (
+    // <div className="container">
+    //   {Message({msg: 'Hello World'})}
+    //   {Message({msg: 'Goodbye World'})}
+    // </div>
+    // )
 
-    const element = <SayHello firstName={false} />
+    // OPTION 3: Using JSX
+    // const element = (
+    // <div className="container">
+    //   <Message msg='Hello World' />
+    //   <Message msg='Goodbye World' />
+    // </div>
+    // )
 
-    ReactDOM.render(element, rootElement)
+    // OPTION 4: Using JSX
+    const Message = (props) => <div className="message">{props.children}</div>
+
+    const element = (
+    <div className="container">
+      <Message>
+        Hello World
+        <Message children='Goodbye World' />
+        <span> Hey there.</span>
+      </Message>
+    </div>
+    )
+
+    // Using capital letter is same as calling React.createElement with the
+    // function that you are referencing.
+    // So you can create custom component to use over and over.
+    console.log(<div>Hello World</div>)
+    console.log(<Message>Hello World</Message>)
+
+    ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>
