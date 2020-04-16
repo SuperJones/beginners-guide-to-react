@@ -1,19 +1,45 @@
+<!--
+  How do you put 2 variables side by side and pass them both as the
+    first arguement in ReactDOM?
+  1. React Fragments
+-->
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!--
+    <span>Hello</span>
+    <span>World</span>
+    -->
+  </div>
+
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    function Message({children}) {
-      return <div className="message">{children}</div>
-    }
+    // const element = <div className="container">Hello World</div>
 
-    const element = (
-      <div className="container">
-        <Message>Hello World</Message>
-        <Message>Goodbye World</Message>
-      </div>
-    )
+    // OPTION 1: Use React.createElement API
+    // const helloElement = React.createElement('span', null, 'Hello')
+    // const worldElement = React.createElement('span', null, 'World')
+    // const element = React.createElement(
+    //   React.Fragment,
+    //   null,
+    //   helloElement,
+    //   ' ',
+    //   worldElement
+    // )
+
+    // OPTION 2: Use JSX
+    // const element =
+    // <React.Fragment>
+    //   <span>Hello</span> <span>World</span>
+    // </React.Fragment>
+
+    // SIMPLIFIED OPTION 2:
+    const element =
+    <>
+      <span>Hello</span> <span>World</span>
+    </>
+
 
     ReactDOM.render(element, document.getElementById('root'))
   </script>
