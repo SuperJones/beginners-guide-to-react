@@ -1,3 +1,11 @@
+<!--
+  Most people are using jsx which is html like syntax in javascript
+  1. So you have to add babel standalone (non-production option)
+      - this compiles scripts
+  2. Change script type to "text/babel"
+      - babel looks for all these scripts, compiles them and adds
+          scripts of compiled code so browser can evaluate it.
+-->
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
@@ -5,10 +13,14 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     const rootElement = document.getElementById('root')
-    const children = 'Hello World'
-    const className = 'container'
-    const props = {children, className}
-    const element = <div {...props} />
+    // const element = React.createElement(
+    //   'div',
+    //   {
+    //     className: 'container'
+    //     children: 'Hello World'
+    //   }
+    // )
+    const element = <div className="container">Hello World</div>
     ReactDOM.render(element, rootElement)
   </script>
 </body>
