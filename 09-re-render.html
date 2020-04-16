@@ -1,3 +1,10 @@
+<!--
+  Going back and forth between javascript and JSX
+  Discussion on interpolation.
+    {} -> js
+    ${} -> jsx
+  Can only put expressions in the curly braces not if statements, for loops, or switch statements
+-->
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
@@ -6,17 +13,46 @@
   <script type="text/babel">
     const rootElement = document.getElementById('root')
 
-    function tick() {
-      const time = new Date().toLocaleTimeString()
-      const element = (
-        <>
-          <input value={time} />
-          <input value={time} />
-        </>
+    // function tick() {
+    //   const time = new Date().toLocaleTimeString()
+    //   const element = (
+    //     <>
+    //       <input value={time} />
+    //       <input value={time} />
+    //     </>
+    //   )
+    //   ReactDOM.render(element, rootElement)
+    // }
+    //
+    // setInterval(tick, 1000)
+
+    // The text "Hello World" has 11 characters
+    // The text "" has No characters
+    // NOTE:
+    // You can't pass a function into create element like this:
+    // React.createElement('div', null, if(statement){})
+
+
+    // js
+    function CharacterCount({text}) {
+      return (
+      // jsx
+      <div>
+        {/* js */`The text "${text}" has `}
+        {/* js */text.length ? <strong /* jsx */>{text.length}</strong> : "No"}
+        {/* js */' characters'}
+      </div>
+      // js
       )
-      ReactDOM.render(element, rootElement)
     }
 
-    setInterval(tick, 1000)
+    const element = (
+    <>
+      <CharacterCount text="Hello World" />
+      <CharacterCount text="" />
+    </>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>
