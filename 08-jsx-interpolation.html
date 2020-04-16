@@ -1,26 +1,59 @@
+<!--
+  Learned about prop types
+  Validate Custom React component Props with PropTypes
+  Add prop types package from unpkg
+    - PropTypes by default are not required, so when not added it doesn't show warning
+      so you have to add .isRequired
+    - In Production prop types are not applied.
+-->
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
   <script type="text/babel">
-    function CharacterCount({text}) {
+    // function CharacterCount({text}) {
+    //   return (
+    //     <div>
+    //       {`The text "${text}" has `}
+    //       {text.length ? <strong>{text.length}</strong> : 'No'}
+    //       {' characters'}
+    //     </div>
+    //   )
+    // }
+    //
+    // const element = (
+    //   <>
+    //     <CharacterCount text="Hello World" />
+    //     <CharacterCount text="" />
+    //   </>
+    // )
+    const rootElement = document.getElementById('root')
+
+    function SayHello({firstName, lastName}) {
       return (
-        <div>
-          {`The text "${text}" has `}
-          {text.length ? <strong>{text.length}</strong> : 'No'}
-          {' characters'}
-        </div>
+      <div>
+        Hello {firstName} {lastName}!
+      </div>
       )
     }
 
-    const element = (
-      <>
-        <CharacterCount text="Hello World" />
-        <CharacterCount text="" />
-      </>
-    )
+    // This is so common that React team created a package on npm that we can add
+    // const PropTypes = {
+    //   string(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error(`Hey, the component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[propName]}`)
+    //     }
+    //   }
+    // }
 
-    ReactDOM.render(element, document.getElementById('root'))
+    SayHello.propTypes = {
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired
+    }
+    const element = <SayHello firstName={false} />
+
+    ReactDOM.render(element, rootElement)
   </script>
 </body>
