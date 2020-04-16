@@ -1,13 +1,55 @@
+<!--
+To include React elements and include them on the page:
+1. Include React & ReactDOM with scripts
+2. Access elements already on page (rootElement)
+3. Create react element (const element)
+4. Call render to render element to DOM node (rootElement)
+-->
+
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script type="text/javascript">
     const rootElement = document.getElementById('root')
-    const element = React.createElement('div', {
-      className: 'container',
-      children: 'Hello World',
-    })
+    // OPTION w/o React
+    // const element = document.createElement('div')
+    //
+    // element.textContent = "Hello World"
+    // element.className = 'container'
+    //
+    // rootElement.appendChild(element)
+
+    // OPTION 1
+    // const element = React.createElement(
+    //   'div',
+    //   {
+    //     className: 'container'
+    //   },
+    //   'Hello World',
+    //   ', Goodbye World'
+    // )
+
+    // OPTION 2
+    // const element = React.createElement(
+    //   'div',
+    //   {
+    //     children: ['Hello World', ', Goodbye World'],
+    //     className: 'container'
+    //   }
+    // )
+
+    // OPTION 3
+    const element = React.createElement(
+      'div',
+      {
+                                  //   type   props      children
+        children: React.createElement('span', null, 'Hello',  ' World'),
+        className: 'container'
+      }
+    )
+
+    console.log(element)
     ReactDOM.render(element, rootElement)
   </script>
 </body>
