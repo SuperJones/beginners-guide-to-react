@@ -1,3 +1,12 @@
+<!--
+  REVIEW:
+  We made square do fancy tilting with vanila tilt library.
+  1. Pass what we get back from React.useRef() as ref in div
+      - Object that has current property on it so that we can mutate property
+      to be whatever we want, w/o triggering a rerender of our component.
+  2. Quick review of VanillaTilt and avoiding memory leaks by destroying references to
+    VanillaTilt.
+ -->
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
@@ -45,21 +54,22 @@
   <script type="text/babel">
     function Tilt({children}) {
       const tiltRef = React.useRef()
-
       React.useEffect(() => {
+        // console.log(tiltRef.current)
         const tiltNode = tiltRef.current
         const vanillaTiltOptions = {
           max: 25,
           speed: 400,
           glare: true,
-          'max-glare': 0.5,
+          'max-glare': 0.5
         }
+
         VanillaTilt.init(tiltNode, vanillaTiltOptions)
+
         return () => {
-          tiltNode.vanillaTilt.destroy()
+          tiltNode.vanillaTilt.destroy
         }
       }, [])
-
       return (
         <div ref={tiltRef} className="tilt-root">
           <div className="tilt-child">{children}</div>
